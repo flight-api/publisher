@@ -1,0 +1,41 @@
+server:
+  port: 8080
+spring:
+  kafka:
+    consumer:
+      bootstrap-servers: localhost:9092
+      group-id: group_id
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    producer:
+      bootstrap-servers: localhost:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+  redis:
+    host: localhost
+    port: 6379
+    password:
+
+    jedis:
+      pool:
+        max-active: 7
+        max-idle: 7
+        min-idle: 2
+        max-wait: -1ms
+  security: 
+    oauth2: 
+      resource:
+        filter-order: 3
+
+    signing-key: MaYzkSjmkzPC57L
+    encoding-strength: 256
+    security-realm: Spring Boot JWT Example Realm
+  
+    jwt: 
+      client-id: testjwtclientid
+      client-secret: XY7kmzoNzl100
+      grant-type: password
+      scope-read: read
+      scope-write: write
+      resource-ids: testjwtresourceid
