@@ -3,6 +3,7 @@ package com.tiket.flight.publisher.controllers;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.tiket.flight.publisher.models.Airline;
+import com.tiket.flight.publisher.models.Airlines;
 import com.tiket.flight.publisher.producers.Sender;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+//import org.bson.types.ObjectId;
 
 @RestController
 @RequestMapping(path = "/v1/airlines")
@@ -34,17 +36,18 @@ public class AirlineController {
         String newAirline = gson.toJson(airline);
         LOGGER.debug("Request: " + newAirline);
         sender.send("airline-create", newAirline);
-        return new ResponseEntity<>("New Airline submitted", HttpStatus.OK);
+        return new ResponseEntity<>("Create Airline submitted", HttpStatus.OK);
     }
 
     @PutMapping(path = "/{id}", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<Object> updateAirline(@RequestBody Airline airline, @PathVariable("id") Integer id) {
-        if(id==null || id<0){
+    public ResponseEntity<Object> updateAirline(@RequestBody Airline airline, @PathVariable("id") String id) {
+        if(id==null || id.isEmpty()){
             return new ResponseEntity<>("Need ID of airline data", HttpStatus.FAILED_DEPENDENCY);
         }
         GsonBuilder builder = new GsonBuilder();
         builder.setPrettyPrinting().serializeNulls();
         Gson gson = builder.create();
+        airline.set_id(id);
         String newAirline = gson.toJson(airline);
         LOGGER.debug("Request: " + newAirline);
         sender.send("airline-update", newAirline);

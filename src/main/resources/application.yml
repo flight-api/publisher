@@ -2,6 +2,8 @@ server:
   port: 8080
 spring:
   kafka:
+    topic:
+      boot: test
     consumer:
       bootstrap-servers: localhost:9092
       group-id: group_id

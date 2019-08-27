@@ -18,4 +18,9 @@ public class Sender {
         LOGGER.info("sending payload='{}' to topic='{}'", payload, topic);
         kafkaTemplate.send(topic, payload);
     }
+
+    public void flush(){
+        kafkaTemplate.flush();
+    }
+
 }

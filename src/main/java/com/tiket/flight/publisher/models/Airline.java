@@ -9,7 +9,7 @@ public class Airline {
         ACTIVE,
         INACTIVE
     }
-    Integer id;
+    String _id;
     String code;
     String name;
     AirlineStatus status;
@@ -24,12 +24,12 @@ public class Airline {
         this.status = status;
     }
 
-    public Integer getId() {
-        return id;
+    public String get_id() {
+        return _id;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void set_id(String _id) {
+        this._id = _id;
     }
 
     public String getCode() {
