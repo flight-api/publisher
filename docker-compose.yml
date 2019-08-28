@@ -1,22 +1,15 @@
-version: '2'
+version: '2.1'
 services:
-#  kafka:
-#    build:
-#      context: kafka
-#      dockerfile: Dockerfile
-#    ports:
-#      - "9092:9092"
-#    environment:
-#      KAFKA_ADVERTISED_HOST_NAME: $CF_HOST_IP
-#      KAFKA_ZOOKEEPER_CONNECT: zk:2181
-#      KAFKA_MESSAGE_MAX_BYTES: 2000000
-#      KAFKA_CREATE_TOPICS: "Topic1:1:1"
-#    volumes:
-#      - /var/run/docker.sock:/var/run/docker.sock
-
-  api:
-    build: .
+  airline_publisher:
+    image: airline_publisher:1.0
+    build:
+      context: ./
+      dockerfile: Dockerfile
     ports:
       - "8080:8080"
-#    depends_on:
-#      - kafka
+    external_links:
+      - appdata_kafka1_1:appdata_kafka1_1
+      - appdata_redis1_1:appdata_redis1_1
+    environment:
+      HOST_KAFKA: appdata_kafka1_1
+      HOST_REDIS: appdata_redis1_1
