@@ -1,4 +1,4 @@
-version: '2.1'
+version: '3.5'
 services:
   zoo1:
     image: zookeeper:3.4.9
@@ -12,6 +12,8 @@ services:
     volumes:
       - ./zk-single-kafka-single/zoo1/data:/data
       - ./zk-single-kafka-single/zoo1/datalog:/datalog
+    networks:
+      - airline-net
 
   kafka1:
     image: confluentinc/cp-kafka:5.3.0
@@ -30,6 +32,8 @@ services:
       - ./zk-single-kafka-single/kafka1/data:/var/lib/kafka/data
     depends_on:
       - zoo1
+    networks:
+      - airline-net
 
   redis1:
     image: redis:latest
@@ -38,3 +42,10 @@ services:
       - ./redis.conf:/usr/local/etc/redis/redis.conf
     ports:
       - "6379:6379"
+    networks:
+      - airline-net
+
+networks:
+  airline-net:
+    # Use a custom driver
+    driver: bridge
