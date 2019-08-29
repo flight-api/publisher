@@ -13,9 +13,8 @@ How to Run Publisher API?
     > export HOST_KAFKA=localhost
     > export HOST_KAFKA=localhost
 3. deploy publisher api
-	> cd ${source_code_root}
 	> mvn clean install
-	> docker-compose up -d
+	> java -jar target/publisher-0.0.1-SNAPSHOT.jar
 
 Documentation
 -
