@@ -8,12 +8,15 @@ How to Run Publisher API?
 -
 1. deploy app-data kafka, zookeeper, and redis
     > cd app-data
+    
     > docker-compose up -d
 2. export local env
     > export HOST_KAFKA=localhost
+    
     > export HOST_KAFKA=localhost
-3. deploy publisher api
+3. running publisher api
 	> mvn clean install
+	
 	> java -jar target/publisher-0.0.1-SNAPSHOT.jar
 
 Documentation
